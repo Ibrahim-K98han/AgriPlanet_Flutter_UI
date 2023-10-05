@@ -1,3 +1,4 @@
+import 'package:agri_planet/data/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
@@ -103,14 +104,16 @@ class ExplorePage extends StatelessWidget {
           GridView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            itemCount: 4,
+            itemCount: products.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
-                childAspectRatio: 0.9),
+                childAspectRatio: 0.75),
             itemBuilder: (context, index) {
-              return ProductCard();
+              return ProductCard(
+                productModel: products[index],
+              );
             },
           )
         ],

@@ -1,8 +1,10 @@
+import 'package:agri_planet/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+  const ProductCard({super.key, required this.productModel});
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class ProductCard extends StatelessWidget {
         ),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
@@ -28,7 +31,7 @@ class ProductCard extends StatelessWidget {
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/tractor.jpg'),
+                image: AssetImage(productModel.image),
                 fit: BoxFit.cover,
               ),
             ),
@@ -43,14 +46,46 @@ class ProductCard extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Tractor',
-                style: Theme.of(context).textTheme.bodyLarge,
-              )
-            ],
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    productModel.name,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RichText(
+                      text: TextSpan(children: [
+                        TextSpan(
+                          text: '\$${productModel.price}',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        TextSpan(
+                          text: '/${productModel.unit}',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        )
+                      ]),
+                    ),
+                    SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: IconButton.filled(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {},
+                        icon: Icon(Icons.add),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           )
         ],
       ),
